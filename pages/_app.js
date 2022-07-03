@@ -1,4 +1,3 @@
-import { SiteContextProvider } from '../context/context'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
@@ -8,9 +7,7 @@ function MyApp({ Component, pageProps }) {
   }
 
   return (
-    <SiteContextProvider>
       <Component {...pageProps} />
-    </SiteContextProvider>
   )
   
 }

@@ -1,119 +1,120 @@
 import { useEffect,useState } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
-import Image from 'next/image'
-import Header from '../components/Header'
-import Input from '../components/InputForm'
-import InputForm from '../components/InputForm'
-import Items from '../components/Items'
-import MainList from '../components/MainList'
-import BillData from '../components/BillData'
-import {SalesData} from '../data/Sales'
+import {RefreshIcon ,TrendingUpIcon, TrendingDownIcon} from '@heroicons/react/outline'
+import Box from '../components/Box'
 
 export default function Home() {
 
-  const [Allbill , setAllbill] = useState(SalesData)
+  const myArray = [1,2,3,4,5,6,1,2,3,4,5,6]
+  const [NewArray , setNewArray] = useState([])
+  const RandomArray = []
+  const indexs = []
+
   
-  const [BillNo ,setBillNo] = useState(Allbill.length + 1)
-
-  const [Currentbill , setCurrentbill] = useState([])
   
-  const [Total , setTotal] = useState(0)
-
- 
-  const Prev = ()=>{
-    if(BillNo > 1){
-      setBillNo(BillNo - 1)
-      // setBillNo(Currentbill[0].id - 1)
-    }
-  }
-
-  const Next = ()=>{
-    if(BillNo < Allbill.length){
-      setBillNo(Currentbill[0].id  + 1)
-    }
-  }
   
-const New = ()=>{
-  setCurrentbill(
-    [{
-      id : Allbill.length + 1,
-      date : "2022-06-22",
-      customer : "newCusotmer",
-      transaction:[{}]
-    }]
-    )
-  }
+  let counter = 0
+  const [ValidTries , setValidTries ] = useState(0)
+  const [FaildTries , setFaildTries ] = useState(0)
 
-// clac bill total
-let items = []
+  let Box1 = 0
+  let Box2 = 0
 
-const Add = (e)=>{
-  if(Currentbill.length === 0) {
-    alert("Pls Press New")
-    return}
- 
-  items.push({name:e, qty:1, price:50,}) 
-  const newTransaction = [...Currentbill[0].transaction ,...items]
-  setCurrentbill([{...Currentbill[0], transaction: newTransaction}] )
-
-  // updata allbills api data 
-    if(Allbill.find(bill => bill.id === BillNo ) === undefined){
-      setAllbill([...Allbill ,Currentbill[0]])
-      console.log("new bill has been added")
+  const select = (e)=>{
+    if(ValidTries + FaildTries === 6) return alert("pls refresh")
+    if(counter < 2){
+      counter = counter +  1 
+      counter === 1 
+      ? Box1 = e
+      :counter === 2
+      ? Box2 = e
+      : null
     }else{
-      const originalArray = [...Allbill.filter((bill)=> {return bill.id !== parseInt(BillNo)})]
-      originalArray.push(Currentbill[0])
-      setAllbill([...originalArray])
-      console.log("new bill has been updated")
-      return Allbill
+      counter = 1
+       Box1 = 0
+       Box2 = 0
     }
-}
 
-
-
-let total = 0
-function calcTotal(){
-  if(Currentbill.length === 0) return
-  let myArray = Currentbill[0].transaction 
-  for(let i = 0; i < myArray.length; i++ ){
-    const tot = (myArray[i].qty * myArray[i].price)
-    total += tot > 0 ? tot : 0
+    if(counter === 2){
+      Box1 === Box2 
+      ? setValidTries(ValidTries + 1) 
+      : setFaildTries(FaildTries + 1)
+    }
   }
-}
 
-calcTotal()
+// refresh game
+  const random = ()=>{
+    setValidTries(0) 
+    setFaildTries(0)
 
-const Print = ()=>{
-  let myData = {
-    "billdata":Currentbill[0],
-    "total":total  
+    RandomArray.length = 0
+    for(let i = 0; i < 100 ; i++){
+      if (RandomArray.length === 12) break
+      const index = Math.floor(Math.random() * 12)
+      if(indexs.indexOf(index) === -1){
+        RandomArray.push(myArray[index])
+        indexs.push(index)
+      }else{
+        continue
+      }
+    }
+
+    setNewArray(RandomArray)
   }
-  sessionStorage.setItem("billData" , JSON.stringify(myData))
-  window.open("/print" ,"_blank" , "width = 400 , height = 700 , left = 300 , top = top", false)
-}
 
-useEffect(()=>{
-  setCurrentbill(Allbill.filter(bill => bill.id === BillNo ) )
-},[ BillNo ])
+
+
+  useEffect(()=>{
+    random()
+
+  },[])
+
 
   return (
 
-      <div className='py-2 pr-4 pl-4 max-h-screen overflow-hidden'>
+      <div className='flex justify-center'>
         <Head>
-          <title>Casher App</title>
+          <title>Memory Game</title>
         </Head>
 
-        <Header prev={Prev} next={Next} New={New} print={Print} total={total} />
-        
-        <BillData data={Currentbill}/>
-    
-        <main className='grid grid-cols-12 mt-4  '>
-            <InputForm data={Currentbill} />
-            <Items add={Add} />
-            <MainList />
-        </main>
+        <div className='flex flex-col lg:w-2/4 md:w-3/4 sm:w-full h-screen '> 
+          <div className='p-1 w-full' >
+            <div className='flex p-1 justify-between items-center border-4 border-blue-400'>
+              <h1 className='font-bold text-blue-600 text-lg'>Hello : Ahmed</h1>
+              <div className='flex space-x-6'>
+                <div className='flex space-x-12 mr-6'>
+                  <h1 className=' font-bold text-lg text-green-500'>Valid Tries : {ValidTries}</h1>
+                  <h1 className=' font-bold text-lg text-red-500'>Wrong Tries : {FaildTries}</h1>
+                </div>
+                  <RefreshIcon 
+                    onClick={random}
+                    className="h-8 w-8 text-blue-600 hover:rotate-180 transition ease-in-out duration-500 cursor-pointer
+                    hover:text-green-500  "                
+                  /> 
+                
+              </div>
+            </div>
+          </div>
+          
+          <div className=' flex flex-wrap justify-center mt-5'>
+            {NewArray.map((el ,id)=>{
+              return (
+                <Box el={el} key={id} fun={select} />
+              )
+            })}
+          </div>
 
+            {ValidTries + FaildTries === 6 && 
+              <div className=' absolute top-0 left-0 w-screen h-screen bg-gray-100
+                flex items-center justify-center' onClick={random}>
+               { ValidTries > 3 
+                ? <TrendingUpIcon className='h-56 w-56 text-green-400 animate-pulse duration-150'/>
+                : <TrendingDownIcon className='h-56 w-56 text-red-400 animate-pulse duration-150'/>
+                }
+              </div>
+            } 
+
+          </div>
       </div>
   )
 }
