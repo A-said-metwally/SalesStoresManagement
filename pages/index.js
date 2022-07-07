@@ -9,8 +9,6 @@ export default function Home() {
   const [NewArray , setNewArray] = useState([])
   const RandomArray = []
   const indexs = []
-
-  
   
   
   let counter = 0
@@ -60,15 +58,15 @@ export default function Home() {
     }
 
     setNewArray(RandomArray)
+
   }
 
 
 
   useEffect(()=>{
-    random()
-
+    random()   
   },[])
-
+  
 
   return (
 
@@ -99,7 +97,7 @@ export default function Home() {
           <div className=' flex flex-wrap justify-center mt-5'>
             {NewArray.map((el ,id)=>{
               return (
-                <Box el={el} key={id} fun={select} />
+                <Box el={el} key={id} fun={select} array={NewArray}  />
               )
             })}
           </div>
