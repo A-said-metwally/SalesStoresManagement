@@ -9,7 +9,13 @@ module.exports = {
     './*.{html,js,ts,jsx}'    
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        ColorOne:"#f06b04",
+        
+        },
+    },
+    
   },
     variants:{
       extend:{},
