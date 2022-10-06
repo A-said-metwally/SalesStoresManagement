@@ -16,3 +16,65 @@
 p{
     margin-bottom: 0 !important;
 }
+::-webkit-scrollbar{
+    display: none;
+}
+
+/* flex flex-1 flex-col  pl-2 pr-2 pt-1 pb-2  h-full overflow-hidden */
+.page-container{
+    display: flex;
+    flex:1;
+    flex-direction: column;
+    padding: 1 2 1 2;
+    height:100%;
+    overflow: hidden;
+}
+.unit-select{
+    height: 45px !important;
+}
+
+.sales-select{
+    height: 40px !important;
+}
+.sales-select2{
+    height: 40px !important;
+}
+
+.sales_form input, select, button{
+    display: block;
+    height: 40px !important;
+    
+}
+
+table thead td {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+table tbody td{
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    /* border: 1px solid #c1c1c1; */
+}
+
+table tbody tr{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.overlay{
+    background: rgba(0,0,0,0.6);
+}
+.confirm{
+    background: rgba(0,0,0,0.1);
+    /* background: yellow; */
+}
+
+.confirm-box{
+    height: 100px !important;
+    width: 500px !important;
+    padding: 3px;
+    transition: all 0.5s;
+}

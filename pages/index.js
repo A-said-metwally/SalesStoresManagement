@@ -1,18 +1,18 @@
-import Link from 'next/link'
-import React,{useState} from 'react'
-import NavBar from '../components/navbar'
-import Head from '../head'
-
-
+import React,{useState, useEffect} from 'react'
 
 function Main({}) {
 
-  return (
-    <div className='flex flex-col h-screen'>
-        <Head title="Ahmed Said" />
-        <NavBar/>
-    </div>
-  )
+  const [Loading, setLoading] = useState(false)
+
+  useEffect(()=>{},[])
+
+        return(
+          <div className='flex flex-1 overflow-hidden '>
+            <img src="/1.webp" 
+              className=" pr-2  w-full h-full rounded-md" 
+              alt="background img" />
+         </div>
+        )
 }
 
 export default Main
