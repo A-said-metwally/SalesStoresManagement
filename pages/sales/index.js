@@ -97,8 +97,6 @@ useEffect(()=>{
 })
 useEffect(()=>{fetchMasterData()},[])
 
-// console.log("done 2", res1 ,res2 ,res3)
-
 
   return (
       <div className='page-container '>

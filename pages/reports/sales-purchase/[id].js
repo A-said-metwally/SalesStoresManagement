@@ -5,9 +5,8 @@ import SalesRepControls from '../../../components/sales/SalesRepControls'
 import SalesRepDetails from '../../../components/sales/SalesRepDetails'
 import {collection, getDocs, query, where} from 'firebase/firestore'
 import {db} from '../../../firebase/init-firebase'
-
-import XLSX from 'xlsx'
-// import * as XLSX from 'https://unpkg.com/xlsx/xlsx.mjs';
+import {handleExportExcel} from '../../../firebase/actions'
+// import XLSX from 'xlsx'
 
 function SalesReport() {
   const router = useRouter()
@@ -74,20 +73,17 @@ function setTotal(){
 setTotal()
 
 // export to excel
-const handleExportExcel = ()=>{
-  console.log(XLSX)
-  var wb = XLSX.utils.book_new(),
-  ws = XLSX.utils.json_to_sheet(MyArray);
+function exportExcel(){
+  handleExportExcel(MyArray, type, Criteria.start, Criteria.end)
+} 
 
-  XLSX.utils.book_append_sheet(wb, ws, 'worksheet' )
-  XLSX.writeFile(wb, `${type} from ${Criteria.start} to ${Criteria.end}.xlsx` )
-}
 
 useEffect(()=>{
   prepareData()
   setMyArray(NewArray)
 },[Bills])
 
+useEffect(()=>{setMyArray([])},[type])
 
 
   return (
@@ -103,14 +99,17 @@ useEffect(()=>{
 
       
       <div className=' flex flex-col  p-2 border rounded-md w-full shadow-md h-full overflow-hidden'>
-        <SalesRepControls updatecriteria={updateCriteria} refresh={getData} exportexcel={handleExportExcel}/><hr />
+        <SalesRepControls updatecriteria={updateCriteria} refresh={getData} exportexcel={exportExcel}/><hr />
 
         <div className='relative  w-full h-full overflow-scroll '>
-          <SalesRepDetails MyArray={MyArray}/>
+          <SalesRepDetails MyArray={MyArray} type={type}/>
         </div>
 
         <div className=' text-2xl text-blue-600 font-bold p-2 bg-gray-300 w-full shadow-md border-1 border-blue-400 rounded-md '>
-          Total : <span className='text-orange-500 '>{tot} $</span> 
+          Total : <span className='text-orange-500 '>
+            {type === "sales" && -tot}
+            {type === "purchase" && tot}  
+            $</span> 
         </div>
       </div>
     </div>

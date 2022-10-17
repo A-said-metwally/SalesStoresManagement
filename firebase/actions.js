@@ -1,10 +1,13 @@
 import {collection, getDocs, query, where} from 'firebase/firestore'
 import {db} from '../firebase/init-firebase'
+import XLSX from 'xlsx'
+
 
 const itemsRef = collection(db, 'items')
 const customersRef = collection(db, 'customers')
 const suppliersRef = collection(db, 'suppliers')
 const billsRef = collection(db , 'bills')
+
 
 // fetch items function
 export const fetchItems = async (f)=>{
@@ -69,3 +72,17 @@ export const fetchBills = async (f)=>{
     .then(billsInfo =>{f(billsInfo.map((info)=>(info.data)))})
     .catch(error => console.log("bills fetch error", error.message))
 }
+
+// export excel
+export const handleExportExcel = (data, title, fromDate, toDate)=>{
+    var wb = XLSX.utils.book_new(),
+    ws = XLSX.utils.json_to_sheet(data);
+  
+    XLSX.utils.book_append_sheet(wb, ws, 'worksheet' )
+    if(fromDate && toDate){
+        XLSX.writeFile(wb, `${title} from ${fromDate} to ${toDate}.xlsx` )
+    }else{
+        XLSX.writeFile(wb, `${title} to ${fromDate}.xlsx` )
+    }
+  }
+  

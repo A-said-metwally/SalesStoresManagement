@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
-import Loading from '../../components/Loading'
-import Details from '../../components/operation/Details'
-import OperationRepControls from '../../components/operation/OperationRepControls'
+import Loading from '../../../components/Loading'
+import Details from '../../../components/operation/Details'
+import OperationRepControls from '../../../components/operation/OperationRepControls'
 
 function Operation() {
   const [loading, setLoading] = useState(false)

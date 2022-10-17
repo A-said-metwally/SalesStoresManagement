@@ -53,7 +53,7 @@ function Menu({}) {
                     ]} />
             <MenuItems 
                     icon={<i className="fas fa-money-bill-wave"></i>}
-                    item="Expenses" 
+                    item="Invoices" 
                     list={[
                         {description:"Customer Invoice", link:"", color:"text-green-600"},
                         {description:"Supplier Invoice", link:"", color:"text-green-600"}

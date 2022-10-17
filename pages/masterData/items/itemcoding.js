@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import {getDocs, addDoc, collection} from 'firebase/firestore'
 import {db} from '../../../firebase/init-firebase'
 import Loading from '../../../components/Loading'
+import { fetchItems } from '../../../firebase/actions'
 
 function ItemCoding() {
 const [loading, setLoading] = useState(true)
@@ -47,29 +48,16 @@ const addNew = ()=>{
         }
     }
 
+const loadItems = (e)=>setItems(e)
 
-const getData = async ()=>{
-    const itemsRef = collection(db, 'items')
-
-    await getDocs(itemsRef)
-    .then(res => {
-        if(res === undefined) return
-        let itemsData = res.docs.map(doc =>(
-            {
-                id:doc.id,
-                data:doc.data()
-            }
-        ))
-        return itemsData
-    })
-    .then(itemsData =>{
-        setItems(itemsData.map((items)=> (items.data)))})
-    .then((res)=>{setLoading(false)})
+const fetchMasterData = async ()=>{
+    await fetchItems(loadItems)
+    .then(()=>{setLoading(false)})
     }
 
 
 useEffect(()=>{
-    getData()
+    fetchMasterData()
 },[])
 
 

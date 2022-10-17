@@ -21,9 +21,9 @@ function SalesTable({data, removeItem}) {
                   <td className='flex-1'>{index + 1}</td>
                   <td className='flex-1'>{d.itemName}</td>
                   <td className='flex-1'>{"Each"}</td>
-                  <td className='flex-1'>{d.qty}</td>
+                  <td className='flex-1'>{-d.qty}</td>
                   <td className='flex-1'>{d.salesPrice}</td>
-                  <td className='flex-1'>{d.qty * d.salesPrice} $</td>
+                  <td className='flex-1'>{-d.qty * d.salesPrice} $</td>
                   <td className='flex-1 '>
                     <button className='w-full flex items-center justify-center text-red-500 text-2xl rounded-lg
                      hover:scale-125  hover:font-bold'

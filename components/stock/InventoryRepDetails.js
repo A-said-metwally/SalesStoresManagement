@@ -1,7 +1,15 @@
 import React from 'react'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 
-function InventoryRepDetails() {
+function InventoryRepDetails({stock}) {
+//   const [Stock , setStock] = useState([])
+
+//   useEffect(()=>{
+//     setStock(stock)
+//   })
+// console.log(Stock)
   return (
     <div>
         <table className='sales-table w-full border'>
@@ -17,17 +25,21 @@ function InventoryRepDetails() {
             </tr>
             </thead>
             <tbody >
-              {/* {MyArray.map((b, index)=>( */}
-                <tr  className='flex justify-between border-b p-2 text-md font-semibold text-center hover:bg-gray-200 '>
-                  <td className='flex-1'>{'1'}</td>
-                  <td className='flex-1'>{'Sugar'}</td>
-                  <td className='flex-1'>{'each'}</td>
-                  <td className='flex-1'>{'21'}</td>                
-                  <td className='flex-1'>{'10'}</td>
-                  <td className='flex-1'>{'210'}</td>
-                  <td className='flex-1'><i className="fas fa-chevron-up text-green-600"></i></td>
+              {stock.map((s, index)=>(
+                <tr key={index}  className='flex justify-between border-b p-2 text-md font-semibold text-center hover:bg-gray-200 '>
+                  <td className='flex-1'>{s.ItemCode}</td>
+                  <td className='flex-1'>{s.ItemName}</td>
+                  <td className='flex-1'>{s.Unit}</td>
+                  <td className='flex-1'>{s.Qty}</td>                
+                  <td className='flex-1'>{s.PurchasePrice}</td>
+                  <td className='flex-1'>{s.PurchasePrice * s.Qty}</td>
+                  <td className='flex-1'>
+                   {s.Qty <= s.MinStock && <i className="fas fa-arrow-down text-red-600"></i>}
+                   {s.Qty >= s.MaxStock && <i className="fas fa-arrow-up text-green-600"></i>}
+                   {s.Qty >= s.MinStock && s.Qty <= s.MaxStock && <i className="fas fa-arrow-right text-blue-600"></i>}
+                  </td>
                 </tr>
-              {/* // ))} */}
+             ))}
             </tbody>
         </table>
       

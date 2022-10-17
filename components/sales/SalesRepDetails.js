@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SalesRepDetails({MyArray}) {
+function SalesRepDetails({MyArray, type}) {
   return (
     <div>
           <table className='sales-table w-full border'>
@@ -22,9 +22,15 @@ function SalesRepDetails({MyArray}) {
                   <td className='flex-1'>{b.date}</td>
                   <td className='flex-1'>{b.customer}</td>
                   <td className='flex-1'>{b.itemName}</td>                
-                  <td className='flex-1'>{b.qty}</td>
                   <td className='flex-1'>{b.salesPrice}</td>
-                  <td className='flex-1'>{b.qty * b.salesPrice} $</td>
+                  <td className='flex-1'>
+                    {type === "sales" && -b.qty}
+                    {type === "purchase" && b.qty}
+                  </td>
+                  <td className='flex-1'>
+                    {type === "sales" && -b.qty * b.salesPrice} 
+                    {type === "purchase" && b.qty * b.salesPrice} 
+                  $</td>
                 </tr>
               ))}
             </tbody>

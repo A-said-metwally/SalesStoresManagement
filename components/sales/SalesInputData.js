@@ -1,5 +1,4 @@
 import React,{useState} from 'react'
-// import {items} from '../utils/data/items'
 
 function SalesInputData({items, sellectItem}) {
 
@@ -7,16 +6,9 @@ const [newItem, setNewItem] = useState({itemName:"", qty:0, salesPrice:0, purcha
 
 const addItem = (e)=>{
     e.preventDefault()
-
-    // set item cost
-    setNewItem({
-        ...newItem,
-        purchasePrice:parseInt(items.find((item)=> item.ItemName === newItem.itemName).PurchasePrice) 
-    })
-
-    const {itemName, qty, salesPrice, purchasePrice} = {...newItem}
-
+    const {itemName, qty, salesPrice} = {...newItem}
     if(itemName && qty && salesPrice ){
+
         sellectItem({id:Math.random(), ...newItem})
         setNewItem({itemName:"", qty:0, salesPrice:0, purchasePrice:0})
     }else{
@@ -34,7 +26,8 @@ return (
                             setNewItem({
                             ...newItem,
                             itemName:i,
-                            salesPrice:parseInt(items.find((item)=> item.ItemName === i).SalesPrice)
+                            salesPrice:parseInt(items.find((item)=> item.ItemName === i).SalesPrice),
+                            purchasePrice:parseInt(items.find((item)=> item.ItemName === i).PurchasePrice)
                         })}}
                         className="sales-select2  w-80 border-1 border-blue-400 focus:outline-none p-2 text-center
                         shadow-md  rounded-md text-lg"
@@ -49,8 +42,8 @@ return (
             </div>
             <div className='flex flex-col'>
                 <label htmlFor="qty" className='w-28 text-lg text-gray-500 ' >QTY.</label>
-                <input type="number" name='qty' placeholder='qty' value={newItem.qty} 
-                    onChange={(e)=>setNewItem({...newItem, qty:parseInt(e.target.value)})}
+                <input type="number" name='qty' placeholder='qty' value={-newItem.qty} 
+                    onChange={(e)=>setNewItem({...newItem, qty:-parseInt(e.target.value)})}
                     className="flex-1 border-1 border-blue-400 focus:outline-none p-2  text-center
                     shadow-md  rounded-md text-lg"
                 />
