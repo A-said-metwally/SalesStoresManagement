@@ -9,7 +9,7 @@ import { verifyPermission } from '../../../utils/verifyLogin'
 
 
 function Index() {
-  verifyPermission()
+  // verifyPermission()
     const [loading, setLoading] = useState(false)
     const [Criteria, setCriteria] = useState()
     const [Items, setItems] = useState(null)

@@ -6,7 +6,7 @@ import { fetchItems } from '../../../firebase/actions'
 import { verifyPermission } from '../../../utils/verifyLogin'
 
 function ItemCoding() {
-verifyPermission()
+// verifyPermission()
 const [loading, setLoading] = useState(true)
 
 const [Items, setItems] = useState(null)

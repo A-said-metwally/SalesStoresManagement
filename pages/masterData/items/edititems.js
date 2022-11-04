@@ -6,7 +6,7 @@ import {db} from '../../../firebase/init-firebase'
 import { verifyPermission } from '../../../utils/verifyLogin'
 
 function EditItems() {
-  verifyPermission()
+  // verifyPermission()
     const [loading, setLoading] = useState(false)
     const [Items, setItems] = useState([])
 

@@ -7,7 +7,7 @@ import {collection, getDocs, query, where} from 'firebase/firestore'
 import { db } from '../../../firebase/init-firebase'
 
 function Operation() {
-  verifyPermission()
+  // verifyPermission()
   const [loading, setLoading] = useState(false)
   const [Criteria, setCriteria] = useState({})
   const [Bills, setBills] = useState([])

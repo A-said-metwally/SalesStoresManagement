@@ -13,7 +13,7 @@ import { verifyPermission } from '../../utils/verifyLogin'
 
 
 function Index() {
-  verifyPermission()
+  // verifyPermission()
   const [loading, setLoading] = useState(false)
   
 // master data states
