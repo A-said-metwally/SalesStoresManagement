@@ -1,7 +1,9 @@
 import React,{useState} from 'react'
+import { useEffect } from 'react'
 import MenuItems from './MenuItems'
 
 function Menu({}) {
+
 
   return (
     <div className=' w-2/12  p-1 h-full pb-4 overflow-y-scroll'>

@@ -6,9 +6,11 @@ import SalesRepDetails from '../../../components/sales/SalesRepDetails'
 import {collection, getDocs, query, where} from 'firebase/firestore'
 import {db} from '../../../firebase/init-firebase'
 import {handleExportExcel} from '../../../firebase/actions'
-// import XLSX from 'xlsx'
+import { verifyPermission } from '../../../utils/verifyLogin'
+
 
 function SalesReport() {
+  verifyPermission()
   const router = useRouter()
   const type = router.query.id
 
@@ -58,7 +60,6 @@ function prepareData(){
       NewArray.push({date, billno, customer, username, ...details[i]})
     }
   }
-  
 }
 
 let tot = 0;

@@ -5,9 +5,11 @@ import Loading from '../../../components/Loading'
 import {collection, getDocs, query, where} from 'firebase/firestore'
 import {db} from '../../../firebase/init-firebase'
 import { fetchItems, handleExportExcel } from '../../../firebase/actions'
+import { verifyPermission } from '../../../utils/verifyLogin'
 
 
 function Index() {
+  verifyPermission()
     const [loading, setLoading] = useState(false)
     const [Criteria, setCriteria] = useState()
     const [Items, setItems] = useState(null)

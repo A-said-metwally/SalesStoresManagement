@@ -3,11 +3,44 @@ import {db} from '../firebase/init-firebase'
 import XLSX from 'xlsx'
 
 
+const usersRef = collection(db, 'users')
 const itemsRef = collection(db, 'items')
 const customersRef = collection(db, 'customers')
 const suppliersRef = collection(db, 'suppliers')
 const billsRef = collection(db , 'bills')
 
+// fetch all users data
+export const fetchAllUsersData = async (f)=>{
+    await getDocs(usersRef)
+    .then(res => {
+        let userData = res.docs.map(doc =>(
+            {
+                id:doc.id,
+                data:doc.data()
+            }
+        ))
+        return userData
+    })
+    .then(userInfo =>{ f(userInfo) })
+    .catch(error => console.log("users fetch error", error.message))
+}
+
+// fetch user data
+export const fetchUserData = async (userCode, f)=>{
+    let q = query(usersRef, where("Code", "==" , userCode))
+    await getDocs(q)
+    .then(res => {
+        let userData = res.docs.map(doc =>(
+            {
+                id:doc.id,
+                data:doc.data()
+            }
+        ))
+        return userData
+    })
+    .then(userInfo =>{ f(userInfo)})
+    .catch(error => console.log("user fetch error", error.message))
+}
 
 // fetch items function
 export const fetchItems = async (f)=>{

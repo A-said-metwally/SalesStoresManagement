@@ -3,8 +3,10 @@ import {getDocs, addDoc, collection} from 'firebase/firestore'
 import {db} from '../../../firebase/init-firebase'
 import Loading from '../../../components/Loading'
 import { fetchItems } from '../../../firebase/actions'
+import { verifyPermission } from '../../../utils/verifyLogin'
 
 function ItemCoding() {
+verifyPermission()
 const [loading, setLoading] = useState(true)
 
 const [Items, setItems] = useState(null)

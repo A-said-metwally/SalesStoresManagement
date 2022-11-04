@@ -3,8 +3,10 @@ import Loading from '../../../components/Loading'
 import EditItem from '../../../components/items/EditItem'
 import {getDocs, collection} from 'firebase/firestore'
 import {db} from '../../../firebase/init-firebase'
+import { verifyPermission } from '../../../utils/verifyLogin'
 
 function EditItems() {
+  verifyPermission()
     const [loading, setLoading] = useState(false)
     const [Items, setItems] = useState([])
 

@@ -8,10 +8,12 @@ import {collection, getDocs, addDoc, Firebase} from 'firebase/firestore'
 import {db} from '../../firebase/init-firebase'
 
 import { fetchItems, fetchBills, fetchSuppliers } from '../../firebase/actions'
+import { verifyPermission } from '../../utils/verifyLogin'
 
 
 
 function Index() {
+  verifyPermission()
   const [loading, setLoading] = useState(false)
   
 // master data states
