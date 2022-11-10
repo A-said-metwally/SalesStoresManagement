@@ -4,9 +4,12 @@ import EditItem from '../../../components/items/EditItem'
 import {getDocs, collection} from 'firebase/firestore'
 import {db} from '../../../firebase/init-firebase'
 import { verifyPermission } from '../../../utils/verifyLogin'
+import { useRouter } from 'next/router'
 
 function EditItems() {
-  // verifyPermission()
+  const router = useRouter()
+  verifyPermission(router)
+
     const [loading, setLoading] = useState(false)
     const [Items, setItems] = useState([])
 

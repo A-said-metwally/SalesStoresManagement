@@ -48,6 +48,12 @@ function Menu({}) {
                         {description:'Transfer Form', link:""},
                     ]} />
             <MenuItems 
+                    icon={<i className="fas fa-trash-restore-alt"></i>}
+                    item="Expensive" 
+                    list={[
+                        {description:'Expensive Form', link:""},
+                    ]} />
+            <MenuItems 
                     icon={<i className="fas fa-warehouse"></i>}
                     item="Stock" 
                     list={[

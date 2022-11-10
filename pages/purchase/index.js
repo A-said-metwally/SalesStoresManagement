@@ -9,11 +9,14 @@ import {db} from '../../firebase/init-firebase'
 
 import { fetchItems, fetchBills, fetchSuppliers } from '../../firebase/actions'
 import { verifyPermission } from '../../utils/verifyLogin'
+import { useRouter } from 'next/router'
 
 
 
 function Index() {
-  // verifyPermission()
+  const router = useRouter()
+  verifyPermission(router)
+
   const [loading, setLoading] = useState(false)
   
 // master data states

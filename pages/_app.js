@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Footer from '../components/mainapp/Footer'
 import Header from '../components/mainapp/Header'
@@ -9,6 +10,7 @@ import { verifySession } from '../utils/verifyLogin'
 
 function MyApp({ Component, pageProps }) {
   
+
   if (Component.getLayout){
     return Component.getLayout(
       <div className='flex flex-col h-screen overflow-hidden'>
@@ -21,6 +23,7 @@ function MyApp({ Component, pageProps }) {
   }
 
   verifySession()
+  
 
   return (
       <div className='flex flex-col h-screen overflow-hidden'>
@@ -28,7 +31,7 @@ function MyApp({ Component, pageProps }) {
         <Header/>
         <main className='flex justify-between relative pt-2 h-screen w-screen overflow-hidden'>
           <Menu/>
-          <Component {...pageProps} />    
+          <Component {...pageProps} ver={verifySession()}  />    
         </main>
         {/* <Footer/> */}
       </div>

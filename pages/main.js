@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react'
 
-function Main({}) {
+function Main() {
+
         return(
           <div className='flex flex-1 overflow-hidden '>
             <img src="/1.webp" 

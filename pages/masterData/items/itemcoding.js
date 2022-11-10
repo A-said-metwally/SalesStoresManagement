@@ -4,9 +4,12 @@ import {db} from '../../../firebase/init-firebase'
 import Loading from '../../../components/Loading'
 import { fetchItems } from '../../../firebase/actions'
 import { verifyPermission } from '../../../utils/verifyLogin'
+import { useRouter } from 'next/router'
 
 function ItemCoding() {
-// verifyPermission()
+const router = useRouter()
+verifyPermission(router)
+
 const [loading, setLoading] = useState(true)
 
 const [Items, setItems] = useState(null)

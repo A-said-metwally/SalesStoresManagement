@@ -10,8 +10,9 @@ import { verifyPermission } from '../../../utils/verifyLogin'
 
 
 function SalesReport() {
-  // verifyPermission()
   const router = useRouter()
+  verifyPermission(router)
+  
   const type = router.query.id
 
     const [loading, setLoading] = useState(false)

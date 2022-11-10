@@ -3,9 +3,14 @@ import User from '../components/users/User'
 import {PlusCircleIcon} from '@heroicons/react/outline'
 import { fetchAllUsersData } from '../firebase/actions'
 import CreateUser from '../components/users/CreateUser'
+import { useRouter } from 'next/router'
+import { verifyPermission } from '../utils/verifyLogin'
 
 
 function UsersPage() {
+const router = useRouter()
+verifyPermission(router)
+
 
 const [Users, setUsers] = useState([])
 const [ShowCreationForm, setShowCreationForm] = useState(false)

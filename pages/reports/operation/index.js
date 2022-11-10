@@ -5,9 +5,12 @@ import OperationRepControls from '../../../components/operation/OperationRepCont
 import { verifyPermission } from '../../../utils/verifyLogin'
 import {collection, getDocs, query, where} from 'firebase/firestore'
 import { db } from '../../../firebase/init-firebase'
+import { useRouter } from 'next/router'
 
 function Operation() {
-  // verifyPermission()
+  const router = useRouter()
+  verifyPermission(router)
+  
   const [loading, setLoading] = useState(false)
   const [Criteria, setCriteria] = useState({})
   const [Bills, setBills] = useState([])

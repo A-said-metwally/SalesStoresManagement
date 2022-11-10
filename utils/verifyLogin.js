@@ -21,7 +21,8 @@ today = `${mm}/${dd}/${yyyy}`
 
 //verify session data
 export const verifySession = ()=>{
-    const router = useRouter()
+      const router = useRouter()
+
     if(decryptedData !== null){
         const sessionDate = decryptedData.sessionDate
         if(today !== sessionDate){
@@ -32,10 +33,16 @@ export const verifySession = ()=>{
 
 
 //verify user permissions and authority
-export function verifyPermission(){
+export function verifyPermission(router){
     let pages = decryptedData?.userInfo[0].data.Pages.map((page=>page.path))
-    let router = useRouter()
+    // let router = useRouter()
     const currentPath = router.pathname
-    const accessability = pages.indexOf(currentPath)
-    if(accessability < 0){router.push('/main'), alert("You haven't Permission")}
+    const accessability = pages?.indexOf(currentPath)
+    
+    console.log(pages)
+    console.log(currentPath)
+    console.log(accessability)
+    if(accessability < 0){router.push('/main')
+    alert("You haven't Permission")
+    }
 }

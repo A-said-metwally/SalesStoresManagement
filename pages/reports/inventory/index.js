@@ -6,10 +6,13 @@ import {collection, getDocs, query, where} from 'firebase/firestore'
 import {db} from '../../../firebase/init-firebase'
 import { fetchItems, handleExportExcel } from '../../../firebase/actions'
 import { verifyPermission } from '../../../utils/verifyLogin'
+import { useRouter } from 'next/router'
 
 
 function Index() {
-  // verifyPermission()
+  const router = useRouter()
+  verifyPermission(router)
+
     const [loading, setLoading] = useState(false)
     const [Criteria, setCriteria] = useState()
     const [Items, setItems] = useState(null)
