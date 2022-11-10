@@ -9,7 +9,7 @@ export function encrypt(info, sessiondate){
 
 
 // decrypt saved data in secure local storage
-let decryptedData = secureLocalStorage.getItem('sessionInfo')
+// let decryptedData = secureLocalStorage.getItem('sessionInfo')
 
 export let today = new Date();
 let dd = String(today.getDate()).padStart(2, '0');
@@ -21,7 +21,8 @@ today = `${mm}/${dd}/${yyyy}`
 
 //verify session data
 export const verifySession = ()=>{
-      const router = useRouter()
+    const router = useRouter()
+    let decryptedData = secureLocalStorage.getItem('sessionInfo')
 
     if(decryptedData !== null){
         const sessionDate = decryptedData.sessionDate
@@ -34,7 +35,9 @@ export const verifySession = ()=>{
 
 //verify user permissions and authority
 export function verifyPermission(router){
+    let decryptedData = secureLocalStorage.getItem('sessionInfo')
     let pages = decryptedData?.userInfo[0].data.Pages.map((page=>page.path))
+    
     // let router = useRouter()
     const currentPath = router.pathname
     const accessability = pages?.indexOf(currentPath)
